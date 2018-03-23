@@ -12,6 +12,27 @@ def initialize(options)
   @funds = options['funds']
 end
 
+def save()
+    sql = "INSERT INTO customers (name, funds)
+          VALUES ($1, $2)
+          RETURNING id"
+    values = [@name, @funds]
+    customer = SqlRunner.run(sql, values).first
+    @id = customer['id'].to_i
+  end
 
+  def update()
+    sql = "UPDATE customers
+          SET (name, funds) = ($1, $2)
+          WHERE id = $3"
+    values = [@name, @funds]
+    SqlRunner.run(sql, values)
+  end
 
+  def delete()
+    sql = "DELETE * FROM customers
+    WHERE id = $1"
+    values = [@id]
+    SqlRunner.run(sql, values)
+  end
 end

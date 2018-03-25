@@ -49,4 +49,11 @@ end
     SqlRunner.run(sql)
   end
 
+  def
+    sql = "SELECT * FROM customers
+          INNER JOIN tickets ON tickets.customer_id = customers.id
+          WHERE film_id = $1"
+          values = [@id]
+          SqlRunner.run(sql)(sql, values)
+        end
 end

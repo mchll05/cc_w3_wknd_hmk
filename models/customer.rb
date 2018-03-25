@@ -50,4 +50,22 @@ def save()
     SqlRunner.run(sql)
   end
 
+  def ticket_cost
+    film_cost = film.price
+    return @funds -= film_cost
+    update()
+  end
+
+def tickets_bought
+  sql = "SELECT * FROM tickets
+        WHERE customer_id = $1"
+  values = [@id]
+  ticket_info = SqlRunner.run(sql, values)
+end
+
+  def audience_count
+
+  end
+  # Check how many customers are going to watch a certain film
+
 end
